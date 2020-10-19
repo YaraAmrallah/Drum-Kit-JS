@@ -9,12 +9,14 @@ for (var i = 0; i < drumButtonsLength; i++) {
   drumButtons[i].addEventListener("click", function() {
     var x = this.textContent;
     makeSound(x);
+    buttonAnimation(x);
   });
 }
 
 document.addEventListener("keypress", function(event) {
   x = event.key;
   makeSound(x);
+  buttonAnimation(x);
 });
 
 
@@ -56,4 +58,13 @@ function makeSound(x) {
   var audioName = "sounds/" + sounds[j] + ".mp3";
   var audio = new Audio(audioName);
   audio.play();
+}
+
+
+function buttonAnimation(currentKey) {
+  var activeButton = document.querySelector("." + currentKey);
+  activeButton.classList.add("pressed");
+  setTimeout(function() {
+    activeButton.classList.remove("pressed");
+  }, 100);
 }
